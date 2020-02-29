@@ -12,6 +12,13 @@ namespace ElvantoApi.Models
         public Services services { get; set; }
     }
 
+    public class ServiceGetDetailsResponse
+    {
+        public string generated_in { get; set; }
+        public string status { get; set; }
+        public Service[] service { get; set; }
+    }
+
     public class Services
     {
         public int on_this_page { get; set; }

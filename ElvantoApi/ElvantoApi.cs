@@ -41,6 +41,9 @@ namespace ElvantoApi
             this.password = password;
         }
 
+        // Siehe https://www.elvanto.com/api/services/getInfo/
+        #region Async Get Calls
+
         public async Task<PeopleGetAllResponse> PeopleGetAllAsync(GetAllPeopleRequest request)
             => await CallAsync<PeopleGetAllResponse>("v1/people/getAll.json", request);
 
@@ -50,6 +53,15 @@ namespace ElvantoApi
         public async Task<ServicesGetAllResponse> ServicesGetAllAsync()
             => await CallAsync<ServicesGetAllResponse>("v1/services/getAll.json", new { all = "yes", fields = new[] { "volunteers" } });
 
+        public async Task<ServicesGetAllResponse> ServicesGetAllNoFieldsAsync()
+          => await CallAsync<ServicesGetAllResponse>("v1/services/getAll.json", new { all = "yes" });
+
+        public async Task<ServiceGetDetailsResponse> ServiceGetDetailsAsync(string serviceId)
+          => await CallAsync<ServiceGetDetailsResponse>("v1/services/getInfo.json", new { id = serviceId, fields = new[] { "volunteers", "plans" } });
+
+        #endregion
+
+        #region Async Post Calls
         public async Task<GroupsChangePersonResponse> GroupsAddPersonAsync(string groupId, string personId, string position = "")
             => await CallAsync<GroupsChangePersonResponse>("https://api.elvanto.com/v1/groups/addPerson.json", new
             {
@@ -66,6 +78,7 @@ namespace ElvantoApi
                 person_id = personId
             }
             );
+        #endregion
 
         public async Task<T> CallAsync<T>(string url, object data)
         {

@@ -59,6 +59,9 @@ namespace ElvantoApi
         public async Task<ServiceGetDetailsResponse> ServiceGetDetailsAsync(string serviceId)
           => await CallAsync<ServiceGetDetailsResponse>("v1/services/getInfo.json", new { id = serviceId, fields = new[] { "volunteers", "plans" } });
 
+        public async Task<ServiceGetDetailsResponse> ServiceGetVolunteersAsync(string serviceId)
+         => await CallAsync<ServiceGetDetailsResponse>("v1/services/getInfo.json", new { id = serviceId, fields = new[] { "volunteers" } });
+
         #endregion
 
         #region Async Post Calls

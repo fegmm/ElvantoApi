@@ -6,6 +6,8 @@
     <Authors>Samuel Weber</Authors>
     <Description>C# Wrapper für die Elvanto Api</Description>
     <PackageReleaseNotes />
+    <RepositoryUrl>https://github.com/fegmm/ElvantoAPI</RepositoryUrl>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

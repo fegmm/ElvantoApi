@@ -11,18 +11,22 @@ namespace ElvantoApi
 {
     public class Client
     {
-        private readonly string apiToken;
-        private readonly string username;
-        private readonly string password;
         private readonly HttpClient client;
 
-        public Client(string apiToken)
+        public Client(string apiToken, bool oauthToken = false)
         {
-            this.apiToken = apiToken;
             client = new HttpClient();
             client.BaseAddress = new Uri("https://api.elvanto.com/");
-            var byteArray = Encoding.ASCII.GetBytes(apiToken + ":");
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+            if (oauthToken)
+            {
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiToken);
+            }
+            else
+            {
+                var byteArray = Encoding.ASCII.GetBytes(apiToken + ":");
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+            }
+            
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings()
             {
                 Formatting = Formatting.Indented,
@@ -35,15 +39,7 @@ namespace ElvantoApi
             };
         }
 
-        public Client(string username, string password)
-        {
-            this.username = username;
-            this.password = password;
-        }
-
-        // Siehe https://www.elvanto.com/api/services/getInfo/
         #region Async Get Calls
-
         public async Task<PeopleGetAllResponse> PeopleGetAllAsync(GetAllPeopleRequest request)
             => await CallAsync<PeopleGetAllResponse>("v1/people/getAll.json", request);
 
@@ -61,7 +57,6 @@ namespace ElvantoApi
 
         public async Task<ServiceGetDetailsResponse> ServiceGetVolunteersAsync(string serviceId)
          => await CallAsync<ServiceGetDetailsResponse>("v1/services/getInfo.json", new { id = serviceId, fields = new[] { "volunteers" } });
-
         #endregion
 
         #region Async Post Calls
@@ -71,16 +66,14 @@ namespace ElvantoApi
                 id = groupId,
                 person_id = personId,
                 position
-            }
-            );
+            });
 
         public async Task<GroupsChangePersonResponse> GroupsRemovePersonAsync(string groupId, string personId)
             => await CallAsync<GroupsChangePersonResponse>("https://api.elvanto.com/v1/groups/removePerson.json", new
             {
                 id = groupId,
                 person_id = personId
-            }
-            );
+            });
         #endregion
 
         public async Task<T> CallAsync<T>(string url, object data)

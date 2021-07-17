@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ElvantoApi.Models
+namespace ElvantoSync.ElvantoApi.Models
 {
     public class GetAllRequest
     {

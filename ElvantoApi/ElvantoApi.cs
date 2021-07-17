@@ -1,4 +1,4 @@
-﻿using ElvantoApi.Models;
+﻿using ElvantoSync.ElvantoApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElvantoApi
+namespace ElvantoSync.ElvantoApi
 {
     public class Client
     {

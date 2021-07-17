@@ -1,4 +1,4 @@
-﻿namespace ElvantoApi.Models
+﻿namespace ElvantoSync.ElvantoApi.Models
 {
     public class PeopleGetAllResponse : Response
     {

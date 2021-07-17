@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElvantoApi", "ElvantoApi\ElvantoApi.csproj", "{1E26C693-4A38-49DF-BA2F-B8CC9120CE6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElvantoSync.ElvantoApi", "ElvantoApi\ElvantoSync.ElvantoApi.csproj", "{1E26C693-4A38-49DF-BA2F-B8CC9120CE6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
